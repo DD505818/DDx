@@ -1,0 +1,1 @@
+# Sentiment manipulation logic
