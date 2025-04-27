@@ -10,3 +10,10 @@ cd frontend || exit
 bash one_click_frontend_deploy.sh
 cd ..
 echo ">>> DDx Super Deployment Complete."
+
+# Create ddx_final_package.zip file
+zip -r ddx_final_package.zip backend frontend
+
+# Optional: Copy ddx_final_package.zip to local machine via gcloud
+# Uncomment the following line to enable copying
+# gcloud compute scp <REMOTE_INSTANCE>:~/ddx_final_package.zip <LOCAL_DESTINATION>
