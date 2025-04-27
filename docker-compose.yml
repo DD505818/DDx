@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    command: pm2-runtime pm2.ecosystem.config.js
+    ports:
+      - "8000:8000"
+    environment:
+      - WS_PORT=${WS_PORT}
+      - UPSTASH_REDIS_URL=${UPSTASH_REDIS_URL}
+      - BOT_MODE=${BOT_MODE}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+    depends_on:
+      - redis
+      - postgres
+  dashboard:
+    image: node:16-alpine
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5175:5175"
+    command: sh -c "pnpm install && pnpm build && pnpm start"
+  redis:
+    image: redis:6-alpine
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: ddx
+      POSTGRES_USER: ddx
+      POSTGRES_PASSWORD: ddxpass
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"

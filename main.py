@@ -1,1 +1,1 @@
-# main.py - Entry point for DDx API
+# FastAPI application entrypoint
