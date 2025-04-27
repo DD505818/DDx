@@ -13,3 +13,10 @@ cd ..
 echo ">>> PM2 processes:"
 pm2 ls
 echo ">>> Deployment Complete. Monitor with 'pm2 logs'"
+
+# Create ddx_final_package.zip file
+zip -r ddx_final_package.zip backend frontend
+
+# Optional: Copy ddx_final_package.zip to local machine via gcloud
+# Uncomment the following line to enable copying
+# gcloud compute scp <REMOTE_INSTANCE>:~/ddx_final_package.zip <LOCAL_DESTINATION>
